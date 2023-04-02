@@ -1,7 +1,8 @@
 {
     "IsEncrypted": false,
-    "Values": {
-        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-        "FUNCTIONS_WORKER_RUNTIME": "dotnet"
-    }
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "CloudAMQPConnectionString": "amqps://vresfcwu:j5mf5N1AVJ8nmYNo5ZTPpq1CgOBOD5wE@goose.rmq2.cloudamqp.com/vresfcwu"
+  }
 }

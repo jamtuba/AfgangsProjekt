@@ -1,2 +1,2 @@
 # AfgangsProjekt
-Code for my final project at SmartLearning
+Kode til foskellige services i forbindelse med mit afgangsprojekt på SmartLearning.
