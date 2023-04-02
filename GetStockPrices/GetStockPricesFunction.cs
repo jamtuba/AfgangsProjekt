@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -19,7 +17,7 @@ namespace GetStockPrices
         {
             // Call API
             HttpClient client = new HttpClient();
-            HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSLA&apikey=G15LZQQ485SJX19H&outputsize=compact");
+            HttpRequestMessage newRequest = new HttpRequestMessage(HttpMethod.Get, Environment.GetEnvironmentVariable("AlphaVantage"));
 
             // Read API
             HttpResponseMessage response = await client.SendAsync(newRequest);
