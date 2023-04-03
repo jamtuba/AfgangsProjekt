@@ -1,3 +1,4 @@
+[![Build and deploy dotnet core app to Azure Function App - janus-rabbitmq-test](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/master_janus-rabbitmq-test.yml/badge.svg)](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/master_janus-rabbitmq-test.yml)
 # AfgangsProjekt
 Kode til forskellige services i forbindelse med mit afgangsprojekt på SmartLearning.
 
