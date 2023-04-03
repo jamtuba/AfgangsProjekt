@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '${{ github.workspace }}/GetStockPrices' # set this to the path to your web app project, defaults to the repository root
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   BUILD_OUTPUT_PATH: '${{ github.workspace }}/build-artifacts'
   DOTNET_VERSION: '6.0.x' # set this to the dotnet version to use
 
@@ -32,7 +32,7 @@ jobs:
         shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet build --configuration Release --output './${{ env.BUILD_OUTPUT_PATH }}' 
+          dotnet build --configuration Release --output ./output
           popd
      
       - name: 'Run Azure Functions Action'
@@ -41,5 +41,5 @@ jobs:
         with:
           app-name: 'janus-rabbitmq-test'
           slot-name: 'Production'
-          package: './${{ env.BUILD_OUTPUT_PATH }}'
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AFF752B810F04DFB81C6318149FB9344 }}
