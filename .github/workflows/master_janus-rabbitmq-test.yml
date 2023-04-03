@@ -32,7 +32,7 @@ jobs:
         shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet build --configuration Release --output ./output
+          dotnet build --configuration Release --output ./build-artifacts
           popd
      
       - name: 'Run Azure Functions Action'
@@ -41,5 +41,5 @@ jobs:
         with:
           app-name: 'janus-rabbitmq-test'
           slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          package: '${{ env.BUILD_OUTPUT_PATH }}'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AFF752B810F04DFB81C6318149FB9344 }}
