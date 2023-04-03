@@ -40,3 +40,12 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AFF752B810F04DFB81C6318149FB9344 }}
+          alphavantage: ${{ secrets.ALPHAVANTAGE }}
+          cloudamqpconnectionstring: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
+      
+      - uses: FranzDiebold/github-env-vars-action@v1.2.0
+      - name: 'Print environment variables'
+        run: |
+          echo "Alpha=$ALPHAVANTAGE"
+          echo "CloAmqp=$CLOUDAMQPCONNECTIONSTRING"
+          
