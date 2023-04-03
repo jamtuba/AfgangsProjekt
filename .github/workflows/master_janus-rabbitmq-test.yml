@@ -42,6 +42,7 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AFF752B810F04DFB81C6318149FB9344 }}
-        env:
+      - uses: azure/appservice-settings@v1
+        with:
           alphavantage: ${{ secrets.ALPHAVANTAGE }}
           cloudamqpconnectionstring: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}         
