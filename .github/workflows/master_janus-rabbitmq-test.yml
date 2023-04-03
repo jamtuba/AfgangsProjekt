@@ -45,6 +45,6 @@ jobs:
           
       - name: Dump GitHub context
         env:
-          GITHUB_CONTEXT: ${{ secrets.ALPHAVANTAGE) }}
+          GITHUB_CONTEXT: ${{ secrets.ALPHAVANTAGE }}
         run: echo "$GITHUB_CONTEXT"
           
