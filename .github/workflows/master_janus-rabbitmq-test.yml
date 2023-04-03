@@ -44,5 +44,10 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AFF752B810F04DFB81C6318149FB9344 }}
       - uses: azure/appservice-settings@v1
         with:
+          app-name: 'janus-rabbitmq-test'
+          mask-inputs: false
+          slot-name: 'production'  # Optional and needed only if the settings have to be configured on the specific deployment slot
+          general-settings-json: '[{ "alphavantage": "secrets.ALPHAVANTAGE", "value": "1", "slotSetting": false },{"cloudamqpconnectionstring": "secrets.CLOUDAMQPCONNECTIONSTRING", "value": "1", "slotSetting": false}]'
+          id: settings
           alphavantage: ${{ secrets.ALPHAVANTAGE }}
           cloudamqpconnectionstring: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}         
