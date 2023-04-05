@@ -1,4 +1,4 @@
-[![Build and deploy dotnet core app to Azure Function App - janus-rabbitmq-test](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/Timer_Function_ci_cd.yml/badge.svg)](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/Timer_Function_ci_cd.yml)
+[![Build and deploy Azure Timer Function - Get Stock Prices](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/Timer_Function_ci_cd.yml/badge.svg)](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/Timer_Function_ci_cd.yml)
 
 # AfgangsProjekt
 Kode til forskellige services i forbindelse med mit afgangsprojekt på SmartLearning.
