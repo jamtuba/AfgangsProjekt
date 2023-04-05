@@ -14,10 +14,9 @@ namespace GetStockPrices
 {
     public class GetStockPricesFunction
     {
-        [FunctionName("GetStockPricesFunction")]
-        public async Task Run(
+        [FunctionName(nameof(GetStockPrices))]
+        public async Task GetStockPrices(
             [TimerTrigger("0 */1 * * * *")] TimerInfo myTimer,
-            //[RabbitMQ(ConnectionStringSetting = "CloudAMQPConnectionString")] IModel channel,
             ILogger log)
         {
             string result;
@@ -65,13 +64,13 @@ namespace GetStockPrices
 
 
             // RabbiMQ
-            var exchange = Endpoints.ExchangeName;
             var conString = Environment.GetEnvironmentVariable("CloudAMQPConnectionString");
 
             var connection = GetConnection.ConnectionGetter(conString);
 
             using var channel = connection.CreateModel();
 
+            var exchange = Endpoints.ExchangeName;
             var queue = Endpoints.StockFeederQueue;
             var routingKey = Endpoints.StockValueInRoutingKey;
 

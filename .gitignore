@@ -476,3 +476,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /GetStockPrices/local.settings.json
+/GetStockPrices/TestJson.json
