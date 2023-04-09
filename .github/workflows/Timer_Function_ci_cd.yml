@@ -37,7 +37,7 @@ jobs:
       - name: 'Test'
         run: dotnet test --verbosity normal  
         env: 
-          CLOUDAMQPCONNECTIONSTRING: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
+          CloudAMQPConnectionString: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
 
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: pwsh
