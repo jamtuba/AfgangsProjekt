@@ -20,6 +20,8 @@ jobs:
     name: Build ⛏️
        
     runs-on: ubuntu-latest
+    env: 
+      CloudAMQPConnectionString: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
     
     steps:
       - name: 'Checkout GitHub Action'
@@ -36,8 +38,7 @@ jobs:
 
       - name: 'Test'
         run: dotnet test --verbosity normal  
-        env: 
-          CloudAMQPConnectionString: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
+        
 
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: pwsh
