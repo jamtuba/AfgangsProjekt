@@ -131,7 +131,8 @@ namespace AP.FunctionTests
         public async Task GetJson_Return_RootObjectAsync()
         {
             // Arrange
-            var expectedJson = File.ReadAllText("C:\\Users\\jamtu\\Dropbox\\Uddannelse\\Afgangsprojekt\\EksamensKode\\AfgangsProjekt\\GetStockPrices\\TestJson.json");
+            var filePath = Path.Join(Path.GetDirectoryName(typeof(GetStockPricesFunction).Assembly.Location), "TestJson.json");
+            var expectedJson = File.ReadAllText(filePath);
             var expectedRootObject = JsonConvert.DeserializeObject<RootClass>(expectedJson);
 
             var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
