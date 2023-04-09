@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       CloudAMQPConnectionString: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
+      AlphaVantage: ${{ secrets.ALPHAVANTAGE }}
     
     steps:
       - name: 'Checkout GitHub Action'
