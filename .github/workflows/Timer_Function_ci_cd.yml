@@ -29,6 +29,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+        env: 
+          CLOUDAMQPCONNECTIONSTRING: ${{ secrets.CLOUDAMQPCONNECTIONSTRING }}
+            
 
       - name: 'Restore dependencies'
         run: dotnet restore --packages .nuget
