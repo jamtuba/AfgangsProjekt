@@ -12,6 +12,7 @@ on:
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '${{ github.workspace }}/GetStockPrices' # set this to the path to your web app project, defaults to the repository root
   BUILD_OUTPUT_PATH: '${{ github.workspace }}/GetStockPrices/build-artifacts'
+  TEST_PATH: '${{ github.workspace }}/AP.FunctionTests'
   DOTNET_VERSION: '6.0.x' # set this to the dotnet version to use
 
 jobs:
@@ -28,6 +29,12 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: 'Restore dependencies'
+        run: dotnet restore --packages .nuget
+
+      - name: 'Test'
+        run: dotnet test --verbosity normal  
 
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: pwsh

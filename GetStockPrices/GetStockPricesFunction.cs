@@ -1,46 +1,56 @@
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GetStockPrices.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using AP.ClassLibrary.Helpers;
 using RabbitMQ.Client;
 using System.Text;
+using HtmlAgilityPack;
+using GetStockPrices.Services;
 
 namespace GetStockPrices
 {
     public class GetStockPricesFunction
     {
+        private readonly HttpClient _client = new();
+        private readonly IGetJsonService _getJsonService;
+        private readonly IWebScraperService _webScraperService;
+
+        public GetStockPricesFunction(IHttpClientFactory clientFactory, IGetJsonService getJsonService, IWebScraperService webScraperService)
+        {
+            _client = clientFactory.CreateClient();
+            _getJsonService = getJsonService;
+            _webScraperService = webScraperService;
+        }
+
         [FunctionName(nameof(GetStockPrices))]
         public async Task GetStockPrices(
             [TimerTrigger("0 */1 * * * *")] TimerInfo myTimer,
             ILogger log)
         {
-            string result;
+            // Webscraper
+            var targetString = "//div[contains(@id, 'node-137')]";
+            var targetUrl = "https://npinvestor.dk/aktier-og-kurslister/aktier/danmark/alle-danske-aktier";
 
-            // Development or Production
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AZURE_FUNCTIONS_ENVIRONMENT")))
-            {
-                // Call API
-                var client = new HttpClient();
-                var newRequest = new HttpRequestMessage(HttpMethod.Get, Environment.GetEnvironmentVariable("AlphaVantage"));
+            HtmlWeb web = new();
+
+            HtmlDocument document = await web.LoadFromWebAsync(targetUrl);
+
+            HtmlNodeCollection targetNodes = document.DocumentNode.SelectNodes(targetString);
+
+            var companies = _webScraperService.GetNodes(targetNodes);
+            //foreach (var company in companies)
+            //{
+            //    log.LogInformation($"CompanyId : {company.CompanyId}\t CompanyName: {company.CompanyName}\t Value: {company.Value}\t Date : {company.Time}");
+            //}
+            log.LogInformation($"Number of companies: {companies.Count}");
 
 
-                // Read API
-                var response = await client.SendAsync(newRequest);
-                result = await response.Content.ReadAsStringAsync();
 
-            }
-            else
-            {
-                // Local file
-                result = File.ReadAllText("C:\\Users\\jamtu\\Dropbox\\Uddannelse\\Afgangsprojekt\\EksamensKode\\AfgangsProjekt\\GetStockPrices\\TestJson.json");
-            }
 
-            var rootObject = JsonConvert.DeserializeObject<RootClass>(result);
+            var rootObject = await _getJsonService.GetJsonFromApi();
 
 
             //if (rootObject.TimeSeries != null)
