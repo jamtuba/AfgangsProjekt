@@ -1,5 +1,6 @@
 ﻿using GetStockPrices.Models;
 using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,8 +10,6 @@ public class WebScraperService : IWebScraperService
 {
     public List<CompanyInfo> GetNodes(HtmlNodeCollection nodes)
     {
-        //var pathToCompanyName = "//*[@id=\"137_company_name_0\"]";
-        //var companyNameXPath = "//*[@id=\"137_company_name_0\"]/a";
         var nodeId = "137";
         int nodeCount = 0;
 
@@ -33,8 +32,9 @@ public class WebScraperService : IWebScraperService
                 {
                     CompanyId = nodeCount + 1,
                     CompanyName = node.FirstChild.InnerText,
-                    Value = node.ChildNodes[1].InnerText
-                });
+                    Value = node.ChildNodes[1].InnerText,
+                    Time = DateTime.Now.ToString("G")
+                }); 
 
                 nodeCount++;
             }

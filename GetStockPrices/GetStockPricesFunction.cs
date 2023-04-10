@@ -15,13 +15,13 @@ namespace GetStockPrices
     public class GetStockPricesFunction
     {
         private readonly HttpClient _client = new();
-        private readonly IGetJsonService _getJsonService;
+        //private readonly IGetJsonService _getJsonService;
         private readonly IWebScraperService _webScraperService;
 
-        public GetStockPricesFunction(IHttpClientFactory clientFactory, IGetJsonService getJsonService, IWebScraperService webScraperService)
+        public GetStockPricesFunction(IHttpClientFactory clientFactory, /*IGetJsonService getJsonService, */IWebScraperService webScraperService)
         {
             _client = clientFactory.CreateClient();
-            _getJsonService = getJsonService;
+            //_getJsonService = getJsonService;
             _webScraperService = webScraperService;
         }
 
@@ -50,7 +50,7 @@ namespace GetStockPrices
 
 
 
-            var rootObject = await _getJsonService.GetJsonFromApi();
+            //var rootObject = await _getJsonService.GetJsonFromApi();
 
 
             //if (rootObject.TimeSeries != null)
@@ -96,7 +96,7 @@ namespace GetStockPrices
 
             channel.QueueBind(queue, exchange, routingKey);
 
-            var message = JsonConvert.SerializeObject(rootObject);
+            var message = JsonConvert.SerializeObject(companies);
             var body = Encoding.UTF8.GetBytes(message);
 
             var props = channel.CreateBasicProperties();

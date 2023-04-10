@@ -21,7 +21,7 @@ public class GetJsonService : IGetJsonService
         string result;
 
         //Development or Production
-        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AZURE_FUNCTIONS_ENVIRONMENT")))
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL")))
         {
             // Call API
             var newRequest = new HttpRequestMessage(HttpMethod.Get, Environment.GetEnvironmentVariable("AlphaVantage"));
@@ -35,7 +35,8 @@ public class GetJsonService : IGetJsonService
         else
         {
             // Local file
-            result = File.ReadAllText("C:\\Users\\jamtu\\Dropbox\\Uddannelse\\Afgangsprojekt\\EksamensKode\\AfgangsProjekt\\GetStockPrices\\TestJson.json");
+            var path = Path.GetDirectoryName(typeof(GetStockPricesFunction).Assembly.Location);
+            result = File.ReadAllText(Path.Join(path, "TestJson.json"));
         }
 
         var rootObject = JsonConvert.DeserializeObject<RootClass>(result);

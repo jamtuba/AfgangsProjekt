@@ -1,4 +1,5 @@
 ﻿global using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+global using AP.ClassLibrary.Model;
 using GetStockPrices.Services;
 using Microsoft.Extensions.DependencyInjection;
 
