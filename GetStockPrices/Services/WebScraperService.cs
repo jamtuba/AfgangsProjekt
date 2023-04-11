@@ -1,5 +1,4 @@
-﻿using GetStockPrices.Models;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ public class WebScraperService : IWebScraperService
 {
     public List<CompanyInfo> GetNodes(HtmlNodeCollection nodes)
     {
-        var nodeId = "137";
+        var nodeId = "307536";
         int nodeCount = 0;
 
         List<CompanyInfo> companies = new();

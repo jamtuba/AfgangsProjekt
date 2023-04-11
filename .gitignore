@@ -480,3 +480,4 @@ $RECYCLE.BIN/
 /AP.FunctionTests/helperHtml.html
 /AP.WebAPI/appsettings.json
 /AP.WebAPI/appsettings.Development.json
+/AP.API/appsettings.json
