@@ -9,6 +9,7 @@ using RabbitMQ.Client;
 using System.Text;
 using HtmlAgilityPack;
 using GetStockPrices.Services;
+using System.Linq;
 
 namespace GetStockPrices
 {
@@ -17,7 +18,7 @@ namespace GetStockPrices
         private readonly HttpClient _client = new();
         //private readonly IGetJsonService _getJsonService;
         private readonly IWebScraperService _webScraperService;
-        private readonly string nodeId = "307536";
+        private readonly string nodeId = "137";
 
         public GetStockPricesFunction(IHttpClientFactory clientFactory, /*IGetJsonService getJsonService, */IWebScraperService webScraperService)
         {
@@ -47,6 +48,7 @@ namespace GetStockPrices
             //    log.LogInformation($"CompanyId : {company.CompanyId}\t CompanyName: {company.CompanyName}\t Value: {company.Value}\t Date : {company.Time}");
             //}
             log.LogInformation($"Number of companies: {companies.Count}");
+            log.LogInformation($"Value of company 1: {companies.FirstOrDefault().Value}");
 
 
 
