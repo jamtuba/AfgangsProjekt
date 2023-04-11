@@ -38,6 +38,8 @@ namespace GetStockPrices
 
             HtmlWeb web = new();
 
+            web.UsingCache = false;
+
             HtmlDocument document = await web.LoadFromWebAsync(targetUrl);
 
             HtmlNodeCollection targetNodes = document.DocumentNode.SelectNodes(targetString);
