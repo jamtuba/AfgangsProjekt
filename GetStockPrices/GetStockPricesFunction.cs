@@ -17,6 +17,7 @@ namespace GetStockPrices
         private readonly HttpClient _client = new();
         //private readonly IGetJsonService _getJsonService;
         private readonly IWebScraperService _webScraperService;
+        private readonly string nodeId = "307536";
 
         public GetStockPricesFunction(IHttpClientFactory clientFactory, /*IGetJsonService getJsonService, */IWebScraperService webScraperService)
         {
@@ -31,7 +32,7 @@ namespace GetStockPrices
             ILogger log)
         {
             // Webscraper
-            var targetString = "//div[contains(@id, 'node-137')]";
+            var targetString = $"//div[contains(@id, 'node-{nodeId}')]";
             var targetUrl = "https://npinvestor.dk/aktier-og-kurslister/aktier/danmark/alle-danske-aktier";
 
             HtmlWeb web = new();
