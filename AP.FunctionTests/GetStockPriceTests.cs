@@ -173,6 +173,8 @@ namespace AP.FunctionTests
         {
 
             // Arrange
+
+            var nodeId = "307536";
             List<CompanyInfo> expectedList = new()
             { new CompanyInfo
                 {
@@ -192,9 +194,9 @@ namespace AP.FunctionTests
                 }
             };
 
-            var html = @"<div><div id='node-137'><div><div id='137_company_name_0'><a>Test1</a></div><div id='137_last_0'>111</div></div><div><div id='137_company_name_1'><a>Test2</a></div><div id='137_last_1'>222</div></div><div><div id='137_company_name_2'><a>Test3</a></div><div id='137_last_2'>333</div></div></div></div>";
+            var html = $@"<div><div id='node-{nodeId}'><div><div id='{nodeId}_company_name_0'><a>Test1</a></div><div id='{nodeId}_last_0'>111</div></div><div><div id='{nodeId}_company_name_1'><a>Test2</a></div><div id='{nodeId}_last_1'>222</div></div><div><div id='{nodeId}_company_name_2'><a>Test3</a></div><div id='{nodeId}_last_2'>333</div></div></div></div>";
 
-            var targetString = "//div[contains(@id, 'node-307536')]";
+            var targetString = $"//div[contains(@id, 'node-{nodeId}')]";
 
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
