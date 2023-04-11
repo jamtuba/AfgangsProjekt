@@ -39,6 +39,7 @@ namespace GetStockPrices
             HtmlWeb web = new();
 
             web.UsingCache = false;
+            web.UserAgent = "APIs-Google (+https://developers.google.com/webmasters/APIs-Google.html)";
 
             HtmlDocument document = await web.LoadFromWebAsync(targetUrl);
 
