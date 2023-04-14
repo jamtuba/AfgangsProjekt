@@ -3,8 +3,8 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches: ['master']
-    paths: ['AP.BlazorWASM/**']
-  workflow_dispatch:
+    #paths: ['AP.BlazorWASM/**']
+  #workflow_dispatch:
 
   pull_request:
     types: [opened, synchronize, reopened, closed]
