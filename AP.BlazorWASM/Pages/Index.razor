@@ -1,0 +1,94 @@
+﻿@page "/"
+@using AP.ClassLibrary.Model;
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject NavigationManager _navManager
+
+<PageTitle>Index</PageTitle>
+
+<h1>Number of companies: @companies.Count</h1>
+
+@if (IsConnected)
+{
+    <h3>On</h3>
+}
+else
+{
+    <h3>Off</h3>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+            <th scope="col">Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var companyInfo in companies)
+        {
+            <tr>
+                <td>@companyInfo.CompanyId</td>
+                <td>@companyInfo.CompanyName</td>
+                <td>@companyInfo.Value</td>
+                <td>@companyInfo.Time</td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+
+@code {
+    private string BaseUrl { get; set; } = "https://localhost:7030";
+    private HubConnection? _hubConnection;
+    private List<CompanyInfo> companies = new();
+
+    private List<string> messages = new List<string>();
+    private string? userInput;
+    private string? messageInput;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl(BaseUrl + "/thehub")
+            .Build();
+
+        _hubConnection.On<List<CompanyInfo>>("RecieveStockData", (newCompanies) =>
+        {
+            if (newCompanies.Any())
+            {
+                companies.Add(newCompanies[1]!);
+                StateHasChanged();
+            }
+        });
+
+        await _hubConnection.StartAsync();
+    }
+
+    //private async Task Send()
+    //{
+    //    if (_hubConnection is not null)
+    //    {
+    //        await _hubConnection.SendAsync("SendMessage", userInput, messageInput);
+    //    }
+    //}
+
+
+    public bool IsConnected =>
+        _hubConnection?.State == HubConnectionState.Connected;
+
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
+}
