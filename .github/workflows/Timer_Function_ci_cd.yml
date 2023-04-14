@@ -5,8 +5,8 @@ name: Build and deploy Azure Timer Function - Get Stock Prices
 
 on:
   push:
-    branches:
-      - master
+    paths:
+      - GetStockPrices
   workflow_dispatch:
 
 env:
