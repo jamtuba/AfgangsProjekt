@@ -54,11 +54,6 @@ public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
                 Console.WriteLine($"Company 1 name: {companies[0].CompanyName}, Value: {companies[0].Value}");
                 Console.WriteLine($"Company 48 name: {companies[47].CompanyName}, Value: {companies[47].Value}");
             }
-            //foreach (var company in companies)
-            //{
-            //    Console.WriteLine($"{company.CompanyName}");
-            //}
-            //Console.WriteLine(_hubContext.Clients.ToString());
         };
 
         _model.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);

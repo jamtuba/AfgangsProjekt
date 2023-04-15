@@ -2,13 +2,7 @@ global using AP.ClassLibrary.Model;
 global using RabbitMQ.Client;
 using AP.API.Hubs;
 using AP.API.Services;
-using AP.ClassLibrary.Helpers;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using RabbitMQ.Client.Events;
-using System.Text;
 
 
 //var AllowedSpecificOrigins = "_allowedSpecificOrigins";
