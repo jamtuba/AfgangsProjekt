@@ -45,7 +45,7 @@ else
 
 
 @code {
-    private string BaseUrl { get; set; } = "https://localhost:7030";
+    private string BaseUrl { get; set; } = string.Empty;
     private HubConnection? _hubConnection;
     private List<CompanyInfo> companies = new();
 
@@ -55,6 +55,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "" : "https://localhost:7030";
+
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(BaseUrl + "/thehub")
             .Build();
@@ -70,15 +72,6 @@ else
 
         await _hubConnection.StartAsync();
     }
-
-    //private async Task Send()
-    //{
-    //    if (_hubConnection is not null)
-    //    {
-    //        await _hubConnection.SendAsync("SendMessage", userInput, messageInput);
-    //    }
-    //}
-
 
     public bool IsConnected =>
         _hubConnection?.State == HubConnectionState.Connected;
