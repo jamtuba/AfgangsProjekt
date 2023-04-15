@@ -10,14 +10,17 @@
 
 <h1>Number of companies: @companies.Count</h1>
 
-@if (IsConnected)
+@*@if (IsConnected)
 {
     <h3>On</h3>
 }
 else
 {
     <h3>Off</h3>
-}
+}*@
+
+<h3>@IsConnected</h3>
+<h3></h3>
 
 <table class="table">
     <thead>
@@ -53,6 +56,7 @@ else
     private List<CompanyInfo> companies = new();
 
     private List<string> messages = new List<string>();
+    private string ErrorMessage = "No Errors";
 
     protected override async Task OnInitializedAsync()
     {
@@ -60,6 +64,7 @@ else
 
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(_environment.IsProduction() ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030/thehub")
+            .WithAutomaticReconnect()
             .Build();
 
         _hubConnection.HandshakeTimeout = new TimeSpan(0, 5, 0);
@@ -73,11 +78,19 @@ else
             }
         });
 
-        await _hubConnection.StartAsync();
+        try
+        {
+            await _hubConnection.StartAsync();
+        }
+        catch (Exception ex)
+        {
+
+            ErrorMessage = ex.Message;
+        }
     }
 
-    public bool IsConnected =>
-        _hubConnection?.State == HubConnectionState.Connected;
+    public string IsConnected =>
+        _hubConnection?.State.ToString();
 
 
     public async ValueTask DisposeAsync()
