@@ -55,7 +55,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "" : "https://localhost:7030";
+        BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/" : "https://localhost:7030";
 
         _hubConnection = new HubConnectionBuilder()
             .WithUrl(BaseUrl + "/thehub")
