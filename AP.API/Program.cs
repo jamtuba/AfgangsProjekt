@@ -39,6 +39,7 @@ builder.Services.AddResponseCompression(opts =>
 //            policy.WithOrigins("https://localhost:7132", "https://ambitious-field-0972b7003.3.azurestaticapps.net");
 //        });
 //});
+builder.Services.AddCors();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
@@ -58,7 +59,6 @@ app.UseHttpsRedirection();
 
 // Nødvendig for at kunne oprette en SignalR forbindelse
 app.UseCors(builder => builder
-    //.WithOrigins("https://localhost:7132", "https://ambitious-field-0972b7003.3.azurestaticapps.net")
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader()

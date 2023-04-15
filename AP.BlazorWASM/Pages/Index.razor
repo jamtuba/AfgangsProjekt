@@ -1,7 +1,10 @@
 ﻿@page "/"
 @using AP.ClassLibrary.Model;
 @using Microsoft.AspNetCore.SignalR.Client;
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+
 @inject NavigationManager _navManager
+@inject IWebAssemblyHostEnvironment _environment
 
 <PageTitle>Index</PageTitle>
 
@@ -50,16 +53,16 @@ else
     private List<CompanyInfo> companies = new();
 
     private List<string> messages = new List<string>();
-    //private string? userInput;
-    //private string? messageInput;
 
     protected override async Task OnInitializedAsync()
     {
-        BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/" : "https://localhost:7030";
+        //BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030";
 
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(BaseUrl + "/thehub")
+            .WithUrl(_environment.IsProduction() ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030/thehub")
             .Build();
+
+        _hubConnection.HandshakeTimeout = new TimeSpan(0, 5, 0);
 
         _hubConnection.On<List<CompanyInfo>>("RecieveStockData", (newCompanies) =>
         {
