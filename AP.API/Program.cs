@@ -11,7 +11,7 @@ using RabbitMQ.Client.Events;
 using System.Text;
 
 
-var AllowedSpecificOrigins = "_allowedSpecificOrigins";
+//var AllowedSpecificOrigins = "_allowedSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
