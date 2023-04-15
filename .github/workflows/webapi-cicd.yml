@@ -7,8 +7,9 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
-
+    paths:
+      - 'AP.API/**'
+      
 jobs:
   build:
     runs-on: windows-latest
