@@ -5,6 +5,7 @@
 
 @inject NavigationManager _navManager
 @inject IWebAssemblyHostEnvironment _environment
+@inject IConfiguration _config
 
 <PageTitle>Index</PageTitle>
 
@@ -62,8 +63,14 @@ else
     {
         //BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030";
 
+        //var constr = _config.GetValue<string>("SignalRAccessToken");
+
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(_environment.IsProduction() ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030/thehub")
+            .WithUrl(_environment.IsProduction() ? "https://blazorwasmsignalrappserver.service.signalr.net/thehub" : "https://localhost:7030/thehub",
+            options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
+            })
             .WithAutomaticReconnect()
             .Build();
 
@@ -90,7 +97,7 @@ else
     }
 
     public string IsConnected =>
-        _hubConnection?.State.ToString();
+        _hubConnection?.State.ToString()!;
 
 
     public async ValueTask DisposeAsync()

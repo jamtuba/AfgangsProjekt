@@ -23,7 +23,11 @@ builder.Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR()
+    .AddAzureSignalR(options =>
+    {
+        options.ConnectionString = builder.Configuration.GetConnectionString("AzureSignalRConnectionString");
+    });
 builder.Services.AddResponseCompression(opts =>
 {
     opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
@@ -64,65 +68,14 @@ app.UseCors(builder => builder
     .AllowAnyHeader()
     );
 
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+};
+
+webSocketOptions.AllowedOrigins.Add("https://localhost:7132");
+webSocketOptions.AllowedOrigins.Add("https://ambitious-field-0972b7003.3.azurestaticapps.net");
+
 app.MapHub<SignalRHub>("/thehub");
-
-//app.MapGet("/", async (IConfiguration config, IHubContext<SignalRHub> hub) =>
-//{
-//    var newRabbit = new RabbitMQService(config, hub);
-//    return await newRabbit.GetRabbitMQ();
-//});
-
-//app.MapGet("/", async (IHubContext<SignalRHub> _hubContext) =>
-//{
-//    List<CompanyInfo> newCompanies = new();
-//    newCompanies.Add(new CompanyInfo { CompanyId = 1, CompanyName = "Test", Value = "88.77" });
-//    await _hubContext.Clients.All.SendAsync("newStockData", newCompanies);
-//    return newCompanies;
-//});
-
-//app.MapGet("/", (IConfiguration _configuration, IHubContext<SignalRHub> _hubContext) =>
-//{
-//    var companies = new List<CompanyInfo>();
-
-//    var conString = _configuration.GetConnectionString("CloudAMQPConnectionString");
-
-//    var connection = GetConnection.ConnectionGetter(conString!);
-
-//    using var channel = connection.CreateModel();
-
-//    var exchange = Endpoints.ExchangeName;
-//    var queueName = Endpoints.StockFeederQueue;
-//    var routingKey = Endpoints.StockValueInRoutingKey;
-
-//    channel.ExchangeDeclare(exchange: exchange,
-//                            durable: true,
-//                            type: ExchangeType.Direct);
-
-//    channel.QueueDeclare(queue: queueName,
-//                         durable: true,
-//                         exclusive: false,
-//                         autoDelete: false,
-//                         arguments: null);
-
-//    channel.QueueBind(queueName, exchange, routingKey);
-
-//    var consumer = new EventingBasicConsumer(channel);
-//    consumer.Received += async (model, ea) =>
-//    {
-//        byte[] body = ea.Body.ToArray();
-//        var message = Encoding.UTF8.GetString(body);
-//        companies = JsonConvert.DeserializeObject<List<CompanyInfo>>(message);
-//        await _hubContext.Clients.All.SendAsync("NewStockData", companies);
-//        Console.WriteLine("New object recieved!");
-//        //Message = $" [x] {message}";
-//    };
-
-//    channel.BasicConsume(queue: queueName,
-//                    autoAck: true,
-//                    consumer: consumer);
-
-//    return companies;
-//});
-
 
 app.Run();
