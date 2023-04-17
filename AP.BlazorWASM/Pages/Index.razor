@@ -2,6 +2,7 @@
 @using AP.ClassLibrary.Model;
 @using Microsoft.AspNetCore.SignalR.Client;
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using Microsoft.AspNetCore.Http.Connections
 
 @inject NavigationManager _navManager
 @inject IWebAssemblyHostEnvironment _environment
@@ -22,6 +23,7 @@ else
 
 <h3>@IsConnected</h3>
 <h3></h3>
+<h3>App is in @_environment.Environment.ToString()</h3>
 
 <table class="table">
     <thead>
@@ -64,17 +66,20 @@ else
     {
         //BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030";
 
-        //var constr = _config.GetValue<string>("SignalRAccessToken");
+        var constr = _config.GetValue<string>("SignalRAccessToken");
 
         var baseUrl = _navManager.BaseUri;
-        _hubUrl = baseUrl.TrimEnd('/') + "/thehub";
+
+        _hubUrl = (_environment.IsProduction()) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : baseUrl.TrimEnd('/') + "/thehub";
+
         _hubConnection = new HubConnectionBuilder()
-            //.WithUrl(_environment.IsProduction() ? "https://blazorwasmsignalrappserver.service.signalr.net/thehub" : "https://localhost:7030/thehub",
-            //options =>
-            //{
-            //    options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
-            //})
-            .WithUrl(_hubUrl)
+            .WithUrl("https://afgangsprojekt-api.azurewebsites.net/thehub",
+            options =>
+            {
+                //options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
+                //options.SkipNegotiation = true;
+                //options.Transports = HttpTransportType.WebSockets;
+            })
             //.WithAutomaticReconnect()
             .Build();
 
