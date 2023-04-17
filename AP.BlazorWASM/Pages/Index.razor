@@ -54,6 +54,7 @@ else
 @code {
     private string BaseUrl { get; set; } = string.Empty;
     private HubConnection? _hubConnection;
+    private string _hubUrl = string.Empty;
     private List<CompanyInfo> companies = new();
 
     private List<string> messages = new List<string>();
@@ -65,16 +66,19 @@ else
 
         //var constr = _config.GetValue<string>("SignalRAccessToken");
 
+        var baseUrl = _navManager.BaseUri;
+        _hubUrl = baseUrl.TrimEnd('/') + "/thehub";
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl(_environment.IsProduction() ? "https://blazorwasmsignalrappserver.service.signalr.net/thehub" : "https://localhost:7030/thehub",
-            options =>
-            {
-                options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
-            })
-            .WithAutomaticReconnect()
+            //.WithUrl(_environment.IsProduction() ? "https://blazorwasmsignalrappserver.service.signalr.net/thehub" : "https://localhost:7030/thehub",
+            //options =>
+            //{
+            //    options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
+            //})
+            .WithUrl(_hubUrl)
+            //.WithAutomaticReconnect()
             .Build();
 
-        _hubConnection.HandshakeTimeout = new TimeSpan(0, 5, 0);
+        //_hubConnection.HandshakeTimeout = new TimeSpan(0, 5, 0);
 
         _hubConnection.On<List<CompanyInfo>>("RecieveStockData", (newCompanies) =>
         {
