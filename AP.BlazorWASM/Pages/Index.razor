@@ -78,7 +78,7 @@ else
             {
                 //options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
                 //options.SkipNegotiation = true;
-                //options.Transports = HttpTransportType.WebSockets;
+                options.Transports = HttpTransportType.WebSockets;
             })
             //.WithAutomaticReconnect()
             .Build();
