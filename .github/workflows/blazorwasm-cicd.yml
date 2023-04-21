@@ -11,7 +11,7 @@ on:
     branches: 
       - 'master'
     paths: 
-      - 'AP.BlazorWASM'
+      - 'AP.BlazorWASM/**'
 
 jobs:
   build_and_deploy_job:
