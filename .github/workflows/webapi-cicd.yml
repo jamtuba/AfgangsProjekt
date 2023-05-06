@@ -30,7 +30,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{ env.BUILD_OUTPUT_PATH }}
+        run: dotnet publish -c Release --property:PublishDir=${{ env.BUILD_OUTPUT_PATH }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
