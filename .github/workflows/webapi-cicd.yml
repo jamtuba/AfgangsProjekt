@@ -16,13 +16,13 @@ jobs:
   build:
     name: Build ⛏️
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish -c Release --property:PublishDir=${{ env.BUILD_OUTPUT_PATH }}
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: .net-app
           path: ${{ env.BUILD_OUTPUT_PATH }}
@@ -41,7 +41,7 @@ jobs:
   deploy:
     name: Deploy 🚀
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     needs: build
     
@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: .net-app
 

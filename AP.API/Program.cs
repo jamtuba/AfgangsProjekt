@@ -1,8 +1,6 @@
 global using AP.ClassLibrary.Model;
 global using RabbitMQ.Client;
 using AP.API.Hubs;
-using AP.API.Services;
-using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
