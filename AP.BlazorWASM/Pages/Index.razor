@@ -67,7 +67,8 @@
     private async Task StartHubConnection()
     {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://blazorchatforjanus.azurewebsites.net/testhub")
+            .WithUrl(_hubUrl)
+            //.WithUrl("https://blazorchatforjanus.azurewebsites.net/testhub")
             //.WithUrl("http://localhost:5208/testhub")
             .WithAutomaticReconnect()
             .Build();
