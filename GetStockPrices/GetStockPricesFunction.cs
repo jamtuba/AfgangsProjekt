@@ -9,14 +9,12 @@ using RabbitMQ.Client;
 using System.Text;
 using HtmlAgilityPack;
 using GetStockPrices.Services;
-using System.Linq;
 
 namespace GetStockPrices
 {
     public class GetStockPricesFunction
     {
         private readonly HttpClient _client = new();
-        //private readonly IGetJsonService _getJsonService;
         private readonly IWebScraperService _webScraperService;
         private readonly string nodeId = "137";
 
@@ -32,6 +30,8 @@ namespace GetStockPrices
             [TimerTrigger("0 */1 * * * *")] TimerInfo myTimer,
             ILogger log)
         {
+            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+
             // Webscraper
             var targetString = $"//div[contains(@id, 'node-{nodeId}')]";
             var targetUrl = "https://npinvestor.dk/aktier-og-kurslister/aktier/danmark/alle-danske-aktier";
@@ -47,40 +47,12 @@ namespace GetStockPrices
             HtmlNodeCollection targetNodes = document.DocumentNode.SelectNodes(targetString);
 
             var companies = _webScraperService.GetNodes(targetNodes);
-            //foreach (var company in companies)
-            //{
-            //    log.LogInformation($"CompanyId : {company.CompanyId}\t CompanyName: {company.CompanyName}\t Value: {company.Value}\t Date : {company.Time}");
-            //}
-            log.LogInformation($"Number of companies: {companies.Count}");
-            //log.LogInformation($"Value of company 1: {companies.FirstOrDefault().Value}");
+            
+            log.LogInformation($"Webscraper was executed at {DateTime.Now:G} getting {companies.Count} companies.");
 
 
 
-
-            //var rootObject = await _getJsonService.GetJsonFromApi();
-
-
-            //if (rootObject.TimeSeries != null)
-            //{
-
-            //    foreach (var dailyData in rootObject.TimeSeries)
-            //    {
-            //        log.LogInformation($"Date: {dailyData.Key}");
-            //        log.LogInformation($"Open: {dailyData.Value.Open}");
-            //        log.LogInformation($"High: {dailyData.Value.High}");
-            //        log.LogInformation($"Low: {dailyData.Value.Low}");
-            //        log.LogInformation($"Close: {dailyData.Value.Close}");
-            //        log.LogInformation($"Adjusted Close: {dailyData.Value.AdjustedClose}");
-            //        log.LogInformation($"Volume: {dailyData.Value.Volume}");
-            //        log.LogInformation($"Dividend Amount: {dailyData.Value.DividendAmount}");
-            //        log.LogInformation($"Split Coefficient: {dailyData.Value.SplitCoefficient}");
-            //    }
-            //}
-
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
-
-
-            // RabbiMQ
+            // RabbitMQ
             var conString = Environment.GetEnvironmentVariable("CloudAMQPConnectionString");
 
             var connection = GetConnection.ConnectionGetter(conString);
@@ -116,6 +88,7 @@ namespace GetStockPrices
                                  body: body);
 
             CloseConnection.CloseAll(channel, connection);
+            log.LogInformation($"RabbitMQ has sent a message with {((body.Length <= 1024) ? body.Length + " bytes" : body.Length/1024 + " kb" )} size at {DateTime.Now:G} to CloudAMQP queue {queue}");
         }
     }
 }
