@@ -12,15 +12,6 @@
 
 <h1>Number of companies: @companies.Count</h1>
 
-@*@if (IsConnected)
-{
-    <h3>On</h3>
-}
-else
-{
-    <h3>Off</h3>
-}*@
-
 <h3>@IsConnected</h3>
 <h3></h3>
 <h3>App is in @_environment.Environment.ToString()</h3>
@@ -64,35 +55,22 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //BaseUrl = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IS_RUNTIME_LOCAL"))) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : "https://localhost:7030";
-
-        var constr = _config.GetValue<string>("SignalRAccessToken");
-
         var baseUrl = _navManager.BaseUri;
 
         _hubUrl = (_environment.IsProduction()) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : baseUrl.TrimEnd('/') + "/thehub";
 
+        await StartHubConnection();
+
+        StartReciever(); // Skal omdøbes!
+    }
+
+    private async Task StartHubConnection()
+    {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://afgangsprojekt-api.azurewebsites.net/thehub",
-            options =>
-            {
-                //options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
-                //options.SkipNegotiation = true;
-                options.Transports = HttpTransportType.WebSockets;
-            })
-            //.WithAutomaticReconnect()
+            .WithUrl("https://blazorchatforjanus.azurewebsites.net/testhub")
+            //.WithUrl("http://localhost:5208/testhub")
+            .WithAutomaticReconnect()
             .Build();
-
-        //_hubConnection.HandshakeTimeout = new TimeSpan(0, 5, 0);
-
-        _hubConnection.On<List<CompanyInfo>>("RecieveStockData", (newCompanies) =>
-        {
-            if (newCompanies.Any())
-            {
-                companies.Add(newCompanies[1]!);
-                StateHasChanged();
-            }
-        });
 
         try
         {
@@ -102,6 +80,24 @@ else
         {
 
             ErrorMessage = ex.Message;
+        }
+
+        StateHasChanged();
+    }
+
+    private void StartReciever()
+    {
+        if (_hubConnection?.State == HubConnectionState.Connected)
+        {
+
+            _hubConnection.On<List<CompanyInfo>>("RecieveStockData", (newCompanies) =>
+            {
+                if (newCompanies.Any())
+                {
+                    companies.Add(newCompanies[1]!);
+                    StateHasChanged();
+                }
+            });
         }
     }
 

@@ -2,11 +2,6 @@ global using AP.ClassLibrary.Model;
 global using RabbitMQ.Client;
 using AP.API.Hubs;
 using AP.API.Services;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.Options;
-
-
-//var AllowedSpecificOrigins = "_allowedSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,28 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSignalR();
-    //.AddAzureSignalR();
 
-// options =>
-//{
-//    options.ConnectionString = builder.Configuration.GetConnectionString("AzureSignalRConnectionString");
-//}
-
-//builder.Services.AddResponseCompression(opts =>
-//{
-//    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-//        new[] { "application/octet-stream" });
-//});
-
-
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy(name: AllowedSpecificOrigins,
-//        policy =>
-//        {
-//            policy.WithOrigins("https://localhost:7132", "https://ambitious-field-0972b7003.3.azurestaticapps.net");
-//        });
-//});
 builder.Services.AddCors();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
@@ -62,8 +36,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseDeveloperExceptionPage();
-
 app.UseHttpsRedirection();
 
 
@@ -74,13 +46,6 @@ app.UseCors(builder => builder
     .AllowAnyHeader()
     );
 
-//var webSocketOptions = new WebSocketOptions
-//{
-//    KeepAliveInterval = TimeSpan.FromMinutes(2)
-//};
-
-//webSocketOptions.AllowedOrigins.Add("https://localhost:7132");
-//webSocketOptions.AllowedOrigins.Add("https://ambitious-field-0972b7003.3.azurestaticapps.net");
 
 app.MapHub<SignalRHub>(SignalRHub.HubUrl);
 
