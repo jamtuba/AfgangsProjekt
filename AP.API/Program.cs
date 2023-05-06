@@ -1,6 +1,7 @@
 global using AP.ClassLibrary.Model;
 global using RabbitMQ.Client;
 using AP.API.Hubs;
+using AP.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,9 +42,9 @@ builder.Services.AddSignalR();
 //        });
 //});
 
-//builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
-//builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
-//builder.Services.AddHostedService<ConsumerHostedService>();
+builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
+builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
+builder.Services.AddHostedService<ConsumerHostedService>();
 
 var app = builder.Build();
 
