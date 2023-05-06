@@ -47,7 +47,7 @@
 @code {
     private string BaseUrl { get; set; } = string.Empty;
     private HubConnection? _hubConnection;
-    private string _hubUrl = string.Empty;
+    //private string _hubUrl = string.Empty;
     private List<CompanyInfo> companies = new();
 
     private List<string> messages = new List<string>();
@@ -57,7 +57,7 @@
     {
         var baseUrl = _navManager.BaseUri;
 
-        _hubUrl = (_environment.IsProduction()) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : baseUrl.TrimEnd('/') + "/thehub";
+        //_hubUrl = (_environment.IsProduction()) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : baseUrl.TrimEnd('/') + "/thehub";
 
         await StartHubConnection();
 
@@ -67,11 +67,17 @@
     private async Task StartHubConnection()
     {
         _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://afgangsprojekt-api.azurewebsites.net/thehub")
-            //.WithUrl("https://blazorchatforjanus.azurewebsites.net/testhub")
-            //.WithUrl("http://localhost:5208/testhub")
+            .WithUrl("https://janusblazortestapi.azurewebsites.net/thehub",
+            //.WithUrl("https://localhost:7030/thehub",
+             options =>
+            {
+                //options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
+                //options.SkipNegotiation = true;
+                options.Transports = HttpTransportType.WebSockets;
+            })
             .WithAutomaticReconnect()
             .Build();
+
 
         try
         {
