@@ -10,11 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 //var AllowedSpecificOrigins = "_allowedSpecificOrigins";
 
 // Giver mulighed for at bruge appsettings variabler her
-builder.Configuration
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables()
-    .AddUserSecrets<Program>()
-    .AddCommandLine(args);
+//builder.Configuration
+//    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+//    .AddEnvironmentVariables()
+//    .AddUserSecrets<Program>()
+//    .AddCommandLine(args);
 
 
 // Add services to the container.
@@ -43,9 +43,9 @@ builder.Services.AddSignalR();
 //        });
 //});
 
-builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
-builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
-builder.Services.AddHostedService<ConsumerHostedService>();
+//builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
+//builder.Services.AddSingleton<IRabbitMQConsumer, RabbitMQConsumer>();
+//builder.Services.AddHostedService<ConsumerHostedService>();
 
 var app = builder.Build();
 
