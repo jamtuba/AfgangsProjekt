@@ -482,3 +482,4 @@ $RECYCLE.BIN/
 /AP.WebAPI/appsettings.Development.json
 /AP.API/appsettings.json
 /AP.BlazorWASM/wwwroot/appsettings.json
+/AP.API_Old
