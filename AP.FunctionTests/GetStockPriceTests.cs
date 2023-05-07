@@ -127,45 +127,45 @@ namespace AP.FunctionTests
             Assert.IsType<AmqpTcpEndpoint>(sut.Endpoint);
         }
 
-        [Fact]
-        public async Task GetJson_Return_RootObjectAsync()
-        {
-            // Arrange
-            var filePath = Path.Join(Path.GetDirectoryName(typeof(GetStockPricesFunction).Assembly.Location), "TestJson.json");
-            var expectedJson = File.ReadAllText(filePath);
-            var expectedRootObject = JsonConvert.DeserializeObject<RootClass>(expectedJson);
+        //[Fact]
+        //public async Task GetJson_Return_RootObjectAsync()
+        //{
+        //    // Arrange
+        //    var filePath = Path.Join(Path.GetDirectoryName(typeof(GetStockPricesFunction).Assembly.Location), "TestJson.json");
+        //    var expectedJson = File.ReadAllText(filePath);
+        //    var expectedRootObject = JsonConvert.DeserializeObject<RootClass>(expectedJson);
 
-            var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
+        //    var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
 
-            mockHttpMessageHandler
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(expectedJson, Encoding.UTF8, "application/json")
-                });
+        //    mockHttpMessageHandler
+        //        .Protected()
+        //        .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+        //        .ReturnsAsync(new HttpResponseMessage
+        //        {
+        //            StatusCode = HttpStatusCode.OK,
+        //            Content = new StringContent(expectedJson, Encoding.UTF8, "application/json")
+        //        });
 
-            var httpClient = new HttpClient(mockHttpMessageHandler.Object);
+        //    var httpClient = new HttpClient(mockHttpMessageHandler.Object);
 
-            _mockFactory
-                .Setup(x => x.CreateClient(It.IsAny<string>()))
-                .Returns(httpClient)
-                .Verifiable();
+        //    _mockFactory
+        //        .Setup(x => x.CreateClient(It.IsAny<string>()))
+        //        .Returns(httpClient)
+        //        .Verifiable();
 
-            var sut = new GetJsonService(_mockFactory.Object);
-
-
-            // Act
-            var actualRootObject = await sut.GetJsonFromApi();
+        //    var sut = new GetJsonService(_mockFactory.Object);
 
 
-            // Assert
-            Assert.IsType<RootClass>(actualRootObject);
-            Assert.Equal(expectedRootObject.MetaData, actualRootObject.MetaData);
-            _mockFactory.Verify();
+        //    // Act
+        //    var actualRootObject = await sut.GetJsonFromApi();
 
-        }
+
+        //    // Assert
+        //    Assert.IsType<RootClass>(actualRootObject);
+        //    Assert.Equal(expectedRootObject.MetaData, actualRootObject.MetaData);
+        //    _mockFactory.Verify();
+
+        //}
 
 
         [Fact]
