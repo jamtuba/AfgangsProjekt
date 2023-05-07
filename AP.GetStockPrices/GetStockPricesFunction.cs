@@ -8,7 +8,6 @@ using AP.ClassLibrary.Helpers;
 using RabbitMQ.Client;
 using System.Text;
 using HtmlAgilityPack;
-using AP.GetStockPrices.Services;
 
 namespace AP.GetStockPrices
 {

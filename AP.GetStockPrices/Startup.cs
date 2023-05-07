@@ -1,8 +1,8 @@
 ﻿global using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 global using AP.ClassLibrary.Model;
-using AP.GetStockPrices.Services;
+global using AP.GetStockPrices.Services;
+global using AP.GetStockPrices.Models;
 using Microsoft.Extensions.DependencyInjection;
-using AP.GetStockPrices.Services;
 
 [assembly: FunctionsStartup(typeof(AP.GetStockPrices.Startup))]
 

@@ -1,5 +1,4 @@
-﻿using AP.GetStockPrices.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
