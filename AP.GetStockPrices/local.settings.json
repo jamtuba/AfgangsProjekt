@@ -1,9 +1,0 @@
-{
-    "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "CloudAMQPConnectionString": "amqps://vresfcwu:UZSiMPaXrO-zXRc5bTfDSM61zjt3ZwMH@goose.rmq2.cloudamqp.com/vresfcwu",
-    "AlphaVantage": "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSLA&apikey=G15LZQQ485SJX19H&outputsize=compact"
-  }
-}

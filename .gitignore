@@ -487,3 +487,5 @@ $RECYCLE.BIN/
 /GetStockPrices/GetStockPrices.csproj
 /AP.GetStockPrices/local.settings.json
 /AP.GetStockPrices/TestJson.json
+/AP.GetStockPrices/local.settings.json
+/AP.GetStockPrices/TestJson.json
