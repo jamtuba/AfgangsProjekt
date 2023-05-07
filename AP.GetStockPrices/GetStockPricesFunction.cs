@@ -78,7 +78,7 @@ namespace AP.GetStockPrices
             var body = Encoding.UTF8.GetBytes(message);
 
             var props = channel.CreateBasicProperties();
-            //props.CorrelationId = customer.CustomerId;
+            //props.CorrelationId = customer.CustomerId;    THIS SHOULD BE REMOVED
             props.Persistent = true;
 
             channel.BasicPublish(exchange: exchange,
