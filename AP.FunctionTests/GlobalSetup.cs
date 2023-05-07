@@ -1,4 +1,4 @@
-﻿using GetStockPrices;
+﻿using AP.GetStockPrices;
 
 namespace AP.FunctionTests
 {

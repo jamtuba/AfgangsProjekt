@@ -28,7 +28,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AP.ClassLibrary\AP.ClassLibrary.csproj" />
-		<ProjectReference Include="..\GetStockPrices\GetStockPrices.csproj" />
+		<ProjectReference Include="..\AP.GetStockPrices\AP.GetStockPrices.csproj" />
 	</ItemGroup>
 
 </Project>

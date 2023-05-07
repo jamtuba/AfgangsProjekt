@@ -1,7 +1,7 @@
 using AP.ClassLibrary.Helpers;
-using GetStockPrices;
-using GetStockPrices.Models;
-using GetStockPrices.Services;
+using AP.GetStockPrices;
+using AP.GetStockPrices.Models;
+using AP.GetStockPrices.Services;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
 using Moq;

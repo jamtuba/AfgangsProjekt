@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 /AP.API/appsettings.json
 /AP.BlazorWASM/wwwroot/appsettings.json
 /AP.API_Old
+/GetStockPrices/GetStockPrices.csproj
