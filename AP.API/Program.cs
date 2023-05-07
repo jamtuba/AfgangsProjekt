@@ -32,7 +32,7 @@ app.MapHub<SignalRHub>(SignalRHub.HubUrl);
 
 var summaries = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching", "Janussy"
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Janussy"
 };
 
 app.MapGet("/weatherforecast", () =>
