@@ -21,7 +21,7 @@ namespace AP.GetStockPrices
         public GetStockPricesFunction(IHttpClientFactory clientFactory, /*IGetJsonService getJsonService, */IWebScraperService webScraperService)
         {
             _client = clientFactory.CreateClient();
-            //_getJsonService = getJsonService;
+            //_getJsonService = getJsonService;     THIS SHOULD BE REMOVED!
             _webScraperService = webScraperService;
         }
 
