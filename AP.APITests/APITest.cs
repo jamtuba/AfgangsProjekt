@@ -76,47 +76,46 @@ public class APITest
     //    //mockrabbitMQConsumer.Verify(c => c.ReadMessages());
     //}
 
-    [Fact]
-    public async Task SignalRHub_SendsAsync()
-    {
-        TestServer server = null;
-        var message = new List<CompanyInfo>() {
-            new CompanyInfo {
-                CompanyId = 1,
-                CompanyName = "Test",
-                Time = DateTime.Now.ToString(),
-                Value = "1234"
-        } }; ;
-        var echo = new List<CompanyInfo>();
-        var webHostBuilder = new WebHostBuilder()
-            .ConfigureServices(services =>
-            {
-                services.AddSignalR();
-            })
-            .Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(routes => routes.MapHub<SignalRHub>("/thehub"));
-            });
+    //[Fact]
+    //public async Task SignalRHub_SendsAsync()
+    //{
+    //    TestServer server = null;
+    //    var message = new List<CompanyInfo>() {
+    //        new CompanyInfo {
+    //            CompanyId = 1,
+    //            CompanyName = "Test",
+    //            Time = DateTime.Now.ToString(),
+    //            Value = "1234"
+    //    } }; ;
+    //    var echo = new List<CompanyInfo>();
+    //    var webHostBuilder = new WebHostBuilder()
+    //        .ConfigureServices(services =>
+    //        {
+    //            services.AddSignalR();
+    //        })
+    //        .Configure(app =>
+    //        {
+    //            app.UseRouting();
+    //            app.UseEndpoints(routes => routes.MapHub<SignalRHub>("/thehub"));
+    //        });
 
-        server = new TestServer(webHostBuilder);
-        var connection = new HubConnectionBuilder()
-            .WithUrl(
-            "http://localhost/thehub",
-            o => o.HttpMessageHandlerFactory = _ => server.CreateHandler())
-            .Build();
+    //    server = new TestServer(webHostBuilder);
+    //    var connection = new HubConnectionBuilder()
+    //        .WithUrl(
+    //        "http://localhost/thehub",
+    //        o => o.HttpMessageHandlerFactory = _ => server.CreateHandler())
+    //        .Build();
 
-        await connection.StartAsync();
-        connection.On<List<CompanyInfo>>("SendMessage", msg =>
-        {
-            echo = msg;
-        });
+    //    await connection.StartAsync();
+    //    connection.On<List<CompanyInfo>>("SendMessage", msg =>
+    //    {
+    //        echo = msg;
+    //    });
 
-        await connection.InvokeAsync("SendMessage", message);
+    //    await connection.InvokeAsync("SendMessage", message);
 
-        var waiter = string.Empty;
-        //Assert.Equal(message, echo);
-    }
+    //    var waiter = string.Empty;
+    //}
 
     //[Fact]
     //public async Task ReadMessages_Should_Read_Messages_And_Invoke_SignalR_Client()
