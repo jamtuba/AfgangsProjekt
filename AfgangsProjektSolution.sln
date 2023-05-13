@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AP.BlazorWASM", "AP.BlazorW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AP.API", "AP.API\AP.API.csproj", "{5719557F-7689-4A5B-8C40-9E55369752E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AP.GetStockPrices", "AP.GetStockPrices\AP.GetStockPrices.csproj", "{7CA86270-DDC1-4741-9446-65EFEBD20452}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AP.GetStockPrices", "AP.GetStockPrices\AP.GetStockPrices.csproj", "{7CA86270-DDC1-4741-9446-65EFEBD20452}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AP.APITests", "AP.APITests\AP.APITests.csproj", "{962C505D-ABBA-4998-9815-72AA36D38EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AP.BlazorWASMTests", "AP.BlazorWASMTests\AP.BlazorWASMTests.csproj", "{2FB3FC97-22FC-4FC8-BAA3-80422CF3CC9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{7CA86270-DDC1-4741-9446-65EFEBD20452}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA86270-DDC1-4741-9446-65EFEBD20452}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA86270-DDC1-4741-9446-65EFEBD20452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962C505D-ABBA-4998-9815-72AA36D38EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962C505D-ABBA-4998-9815-72AA36D38EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962C505D-ABBA-4998-9815-72AA36D38EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962C505D-ABBA-4998-9815-72AA36D38EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB3FC97-22FC-4FC8-BAA3-80422CF3CC9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB3FC97-22FC-4FC8-BAA3-80422CF3CC9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB3FC97-22FC-4FC8-BAA3-80422CF3CC9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB3FC97-22FC-4FC8-BAA3-80422CF3CC9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

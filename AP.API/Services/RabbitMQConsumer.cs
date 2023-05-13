@@ -15,11 +15,14 @@ public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
     private readonly string _exchange = Endpoints.ExchangeName;
     private readonly string _queueName = Endpoints.StockFeederQueue;
     private readonly string _routingKey = Endpoints.StockValueInRoutingKey;
+    private readonly IConfiguration _configuration;
 
 
-    public RabbitMQConsumer(IRabbitMQService rabbitMQService, IHubContext<SignalRHub> hubContext)
+    public RabbitMQConsumer(IRabbitMQService rabbitMQService, IHubContext<SignalRHub> hubContext, IConfiguration configuration)
     {
-        _connection = rabbitMQService.CreateConnection();
+        _configuration = configuration;
+        var conString = _configuration.GetConnectionString("CloudAMQPConnectionString");
+        _connection = rabbitMQService.CreateConnection(conString);
         _model = _connection.CreateModel();
 
         _model.ExchangeDeclare(exchange: _exchange,

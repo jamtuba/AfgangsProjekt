@@ -6,7 +6,11 @@ public static class GetConnection
 {
     public static IConnection ConnectionGetter(string uri)
     {
-        var factory = new ConnectionFactory { Uri = new Uri(uri) };
+        ConnectionFactory factory = new()
+        {
+            Uri = new Uri(uri),
+            DispatchConsumersAsync = true
+        };
 
         var connection = factory.CreateConnection();
 

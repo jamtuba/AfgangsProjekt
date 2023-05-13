@@ -2,5 +2,5 @@
 
 public interface IRabbitMQService
 {
-    IConnection CreateConnection();
+    IConnection CreateConnection(string url);
 }

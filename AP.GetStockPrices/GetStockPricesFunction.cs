@@ -17,10 +17,9 @@ namespace AP.GetStockPrices
         private readonly IWebScraperService _webScraperService;
         private readonly string nodeId = "137";
 
-        public GetStockPricesFunction(IHttpClientFactory clientFactory, /*IGetJsonService getJsonService, */IWebScraperService webScraperService)
+        public GetStockPricesFunction(IHttpClientFactory clientFactory, IWebScraperService webScraperService)
         {
             _client = clientFactory.CreateClient();
-            //_getJsonService = getJsonService;     THIS SHOULD BE REMOVED!
             _webScraperService = webScraperService;
         }
 
@@ -78,7 +77,6 @@ namespace AP.GetStockPrices
             var body = Encoding.UTF8.GetBytes(message);
 
             var props = channel.CreateBasicProperties();
-            //props.CorrelationId = customer.CustomerId;    THIS SHOULD BE REMOVED
             props.Persistent = true;
 
             channel.BasicPublish(exchange: exchange,

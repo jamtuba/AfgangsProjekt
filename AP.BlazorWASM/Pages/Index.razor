@@ -6,13 +6,12 @@
 
 @inject NavigationManager _navManager
 @inject IWebAssemblyHostEnvironment _environment
-@inject IConfiguration _config
 
 <PageTitle>Index</PageTitle>
 
 <h1>Number of companies: @companies.Count</h1>
 
-<h3>@IsConnected</h3>
+<h2>@IsConnected</h2>
 <h3></h3>
 <h3>App is in @_environment.Environment.ToString()</h3>
 
@@ -41,13 +40,9 @@
 </table>
 
 
-
-
-
 @code {
-    private string BaseUrl { get; set; } = string.Empty;
+    //private string BaseUrl { get; set; } = string.Empty;
     private HubConnection? _hubConnection;
-    //private string _hubUrl = string.Empty;
     private List<CompanyInfo> companies = new();
 
     private List<string> messages = new List<string>();
@@ -55,13 +50,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var baseUrl = _navManager.BaseUri;
-
-        //_hubUrl = (_environment.IsProduction()) ? "https://afgangsprojekt-api.azurewebsites.net/thehub" : baseUrl.TrimEnd('/') + "/thehub";
+        //var baseUrl = _navManager.BaseUri;
 
         await StartHubConnection();
 
-        StartReciever(); // Skal omdøbes!
+        StartRecieving();
     }
 
     private async Task StartHubConnection()
@@ -71,8 +64,6 @@
             //.WithUrl("https://localhost:7030/testhub",
              options =>
             {
-                //options.AccessTokenProvider = () => Task.FromResult(_config.GetValue<string?>("SignalRAccessToken"));
-                //options.SkipNegotiation = true;
                 options.Transports = HttpTransportType.WebSockets;
             })
             .WithAutomaticReconnect()
@@ -92,7 +83,7 @@
         StateHasChanged();
     }
 
-    private void StartReciever()
+    private void StartRecieving()
     {
         if (_hubConnection?.State == HubConnectionState.Connected)
         {

@@ -2,18 +2,11 @@
 
 public class RabbitMQService : IRabbitMQService
 {
-    private readonly IConfiguration _configuration;
-
-    public RabbitMQService(IConfiguration configuration)
+    public IConnection CreateConnection(string url)
     {
-        _configuration = configuration;
-    }
-
-    public IConnection CreateConnection()
-    {
-        var conString = _configuration.GetConnectionString("CloudAMQPConnectionString");
+        
         ConnectionFactory connection = new();
-        connection.Uri = new Uri(conString);
+        connection.Uri = new Uri(url);
         connection.DispatchConsumersAsync = true;
 
         var channel = connection.CreateConnection();

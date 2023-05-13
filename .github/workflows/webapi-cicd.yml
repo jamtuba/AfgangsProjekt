@@ -10,6 +10,7 @@ on:
 env:
   API_PACKAGE_PATH: '${{ github.workspace }}/AP.API'
   API_CSPROJ_FILE: '${{ github.workspace }}/AP.API/AP.API.csproj'
+  APITESTS_CSPROJ_FILE: '${{ github.workspace }}/AP.APITests/AP.APITests.csproj'
   BUILD_OUTPUT_PATH: '${{ github.workspace }}/AP.API/build-artifacts'
   DOTNET_VERSION: '6.0.x'
 
@@ -29,6 +30,9 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build ${{ env.API_CSPROJ_FILE }} --configuration Release
+
+      - name: Test
+        run: dotnet test ${{ env.APITESTS_CSPROJ_FILE }} --verbosity normal  
 
       - name: dotnet publish
         run: dotnet publish ${{ env.API_CSPROJ_FILE }} -c Release --property:PublishDir=${{ env.BUILD_OUTPUT_PATH }}
