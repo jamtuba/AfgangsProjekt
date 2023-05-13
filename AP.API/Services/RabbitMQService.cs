@@ -7,7 +7,7 @@ public class RabbitMQService : IRabbitMQService
         
         ConnectionFactory connection = new();
         connection.Uri = new Uri(url);
-        connection.DispatchConsumersAsync = true;
+        connection.DispatchConsumersAsync = true; // enabler async consumer dispathcer
 
         var channel = connection.CreateConnection();
 
