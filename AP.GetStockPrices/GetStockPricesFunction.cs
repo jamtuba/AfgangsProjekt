@@ -63,7 +63,7 @@ namespace AP.GetStockPrices
 
             channel.ExchangeDeclare(exchange: exchange,
                                     durable: true,
-                                    type: ExchangeType.Direct);
+                                    type: ExchangeType.Topic);
 
             channel.QueueDeclare(queue: queue,
                                  durable: true,
@@ -78,6 +78,7 @@ namespace AP.GetStockPrices
 
             var props = channel.CreateBasicProperties();
             props.Persistent = true;
+            props.ContentType = "application/json";
 
             channel.BasicPublish(exchange: exchange,
                                  routingKey: routingKey,

@@ -27,7 +27,7 @@ public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
 
         _model.ExchangeDeclare(exchange: _exchange,
                                 durable: true,
-                                type: ExchangeType.Direct);
+                                type: ExchangeType.Topic);
 
         _model.QueueDeclare(queue: _queueName,
                              durable: true,
