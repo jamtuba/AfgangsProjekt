@@ -17,22 +17,16 @@ namespace AP.FunctionTests
     {
         private readonly Mock<ILogger> _mockLogger;
         private readonly Mock<IHttpClientFactory> _mockFactory;
-        //private readonly Mock<IGetJsonService> _mockGetJson;
         private readonly Mock<IWebScraperService> _mockWebscraper;
-
+        private readonly Mock<IRabbitMQPublisherService> _mockRabbitMQPublisher;
 
         public GetStockPriceTests()
         {
             GlobalSetup.ConfigureEnvironmentVariablesFromLocalSettings();
             _mockLogger = new();
             _mockFactory = new();
-            //_mockGetJson = new();
             _mockWebscraper = new();
-
-
-            //_mockGetJson.Setup<Task<RootClass>>(gj => gj.GetJsonFromApi())
-            //               .ReturnsAsync(new RootClass());
-
+            _mockRabbitMQPublisher = new();
             _mockWebscraper.Setup<List<CompanyInfo>>(ws => ws.GetNodes(It.IsAny<HtmlNodeCollection>()))
                 .Returns(new List<CompanyInfo>());
         }
@@ -45,7 +39,7 @@ namespace AP.FunctionTests
 
             // Act
 
-            var getStockPrices = new GetStockPricesFunction(_mockFactory.Object, /*_mockGetJson.Object, */_mockWebscraper.Object);
+            var getStockPrices = new GetStockPricesFunction(_mockFactory.Object,_mockWebscraper.Object, _mockRabbitMQPublisher.Object);
             await getStockPrices.GetStockPrices(null, _mockLogger.Object);
 
 

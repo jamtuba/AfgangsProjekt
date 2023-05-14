@@ -20,9 +20,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Services\" />
-	</ItemGroup>
-	<ItemGroup>
 		<ProjectReference Include="..\AP.ClassLibrary\AP.ClassLibrary.csproj" />
 	</ItemGroup>
 	<ItemGroup>

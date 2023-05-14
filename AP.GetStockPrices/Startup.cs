@@ -16,5 +16,6 @@ public class Startup : FunctionsStartup
 
         builder.Services.AddScoped<IGetJsonService, GetJsonService>();
         builder.Services.AddScoped<IWebScraperService, WebScraperService>();
+        builder.Services.AddScoped<IRabbitMQPublisherService, RabbitMQPublisherService>();
     }
 }

@@ -3,10 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using AP.ClassLibrary.Helpers;
-using RabbitMQ.Client;
-using System.Text;
 using HtmlAgilityPack;
 
 namespace AP.GetStockPrices
@@ -15,12 +11,14 @@ namespace AP.GetStockPrices
     {
         private readonly HttpClient _client = new();
         private readonly IWebScraperService _webScraperService;
+        private readonly IRabbitMQPublisherService _rabbitMQPublisherService;
         private readonly string nodeId = "137";
 
-        public GetStockPricesFunction(IHttpClientFactory clientFactory, IWebScraperService webScraperService)
+        public GetStockPricesFunction(IHttpClientFactory clientFactory, IWebScraperService webScraperService, IRabbitMQPublisherService rabbitMQPublisherService)
         {
             _client = clientFactory.CreateClient();
             _webScraperService = webScraperService;
+            _rabbitMQPublisherService = rabbitMQPublisherService;
         }
 
         [FunctionName(nameof(GetStockPrices))]
@@ -36,8 +34,8 @@ namespace AP.GetStockPrices
 
             HtmlWeb web = new();
 
-            web.UsingCache = false;
-            web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0)";
+            //web.UsingCache = false;
+            //web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0)";
 
 
             HtmlDocument document = await web.LoadFromWebAsync(targetUrl);
@@ -51,41 +49,8 @@ namespace AP.GetStockPrices
 
 
             // RabbitMQ
-            var conString = Environment.GetEnvironmentVariable("CloudAMQPConnectionString");
+            var (queue, body) = _rabbitMQPublisherService.PublishRabbitMQ(companies);
 
-            var connection = GetConnection.ConnectionGetter(conString);
-
-            using var channel = connection.CreateModel();
-
-            var exchange = Endpoints.ExchangeName;
-            var queue = Endpoints.StockFeederQueue;
-            var routingKey = Endpoints.StockValueInRoutingKey;
-
-            channel.ExchangeDeclare(exchange: exchange,
-                                    durable: true,
-                                    type: ExchangeType.Topic);
-
-            channel.QueueDeclare(queue: queue,
-                                 durable: true,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
-
-            channel.QueueBind(queue, exchange, routingKey);
-
-            var message = JsonConvert.SerializeObject(companies);
-            var body = Encoding.UTF8.GetBytes(message);
-
-            var props = channel.CreateBasicProperties();
-            props.Persistent = true;
-            props.ContentType = "application/json";
-
-            channel.BasicPublish(exchange: exchange,
-                                 routingKey: routingKey,
-                                 basicProperties: props,
-                                 body: body);
-
-            CloseConnection.CloseAll(channel, connection);
             log.LogInformation($"RabbitMQ has sent a message with {((body.Length <= 1024) ? body.Length + " bytes" : body.Length / 1024 + " kb")} size at {DateTime.Now:G} to CloudAMQP queue {queue}");
         }
     }
