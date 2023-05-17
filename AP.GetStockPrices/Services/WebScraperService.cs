@@ -1,7 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace AP.GetStockPrices.Services;
@@ -33,8 +32,7 @@ public class WebScraperService : IWebScraperService
                     CompanyId = nodeCount + 1,
                     CompanyName = node.FirstChild.InnerText,
                     Value = node.ChildNodes[1].InnerText,
-                    Time = DateTime.Now.ToString("G",
-                    CultureInfo.CreateSpecificCulture("da-DK"))
+                    Time = DateTime.Now.ToString("H:mm:ss d. MMMM yyyy")
                 }); 
 
                 nodeCount++;
