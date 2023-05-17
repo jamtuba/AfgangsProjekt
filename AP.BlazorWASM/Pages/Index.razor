@@ -41,7 +41,6 @@
 
 
 @code {
-    //private string BaseUrl { get; set; } = string.Empty;
     private HubConnection? _hubConnection;
     private List<CompanyInfo> companies = new();
 
@@ -50,8 +49,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //var baseUrl = _navManager.BaseUri;
-
         await StartHubConnection();
 
         StartRecieving();
