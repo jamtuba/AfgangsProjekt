@@ -5,7 +5,7 @@ namespace AP.APITests;
 
 public class APITestSetup
 {
-    static string _fileName = "appsettings.json";
+    static readonly string _fileName = "appsettings.json";
     public static void ConfigureEnvironmentVariablesFromAppSettings()
     {
 
@@ -14,12 +14,6 @@ public class APITestSetup
         if (File.Exists(Path.Join(path, _fileName)))
         {
             var json = File.ReadAllText(Path.Join(path, _fileName));
-
-            //// Tilføjer til Configurationfilen
-            //var configuration = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile(json)
-            //    .Build();
 
             var parsed = Newtonsoft.Json.Linq.JObject.Parse(json).Value<Newtonsoft.Json.Linq.JObject>("ConnectionStrings");
 

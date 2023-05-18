@@ -1,6 +1,5 @@
 using AP.ClassLibrary.Helpers;
 using AP.GetStockPrices;
-using AP.GetStockPrices.Models;
 using AP.GetStockPrices.Services;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
@@ -119,46 +118,6 @@ namespace AP.FunctionTests
 
             // Assert
             Assert.IsType<AmqpTcpEndpoint>(sut.Endpoint);
-        }
-
-        [Fact]
-        public async Task GetJson_Return_RootObjectAsync()
-        {
-            // Arrange
-            var filePath = Path.Join(Path.GetDirectoryName(typeof(GetStockPricesFunction).Assembly.Location), "TestJson.json");
-            var expectedJson = File.ReadAllText(filePath);
-            var expectedRootObject = JsonConvert.DeserializeObject<RootClass>(expectedJson);
-
-            var mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-
-            mockHttpMessageHandler
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(expectedJson, Encoding.UTF8, "application/json")
-                });
-
-            var httpClient = new HttpClient(mockHttpMessageHandler.Object);
-
-            _mockFactory
-                .Setup(x => x.CreateClient(It.IsAny<string>()))
-                .Returns(httpClient)
-                .Verifiable();
-
-            var sut = new GetJsonService(_mockFactory.Object);
-
-
-            // Act
-            var actualRootObject = await sut.GetJsonFromApi();
-
-
-            // Assert
-            Assert.IsType<RootClass>(actualRootObject);
-            Assert.Equal(expectedRootObject.MetaData, actualRootObject.MetaData);
-            _mockFactory.Verify();
-
         }
 
 
