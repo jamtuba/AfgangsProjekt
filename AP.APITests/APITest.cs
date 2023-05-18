@@ -48,32 +48,42 @@ public class APITest
     //public async Task RabbitMQConsumer_Using_RabbitMQService()
     //{
 
-    //    // Arrange
-    //    //var consumer = new AsyncEventingBasicConsumer(_model);
+        // Arrange
+        //var consumer = new AsyncEventingBasicConsumer(_model);
+        //var _mockRabbitMQService = new Mock<IRabbitMQService>();
 
-    //    //_mockRabbitMQService.Setup(rs => rs.CreateConnection(_url))
-    //    //    .Returns(_connection);
+        //_mockRabbitMQService.Setup(rs => rs.CreateConnection(_url))
+        //    .Returns(_connection);
 
-    //    var mockClients = new Mock<IHubClients>();
-    //    //var mockClientProxy = new Mock<IClientProxy>();
-    //    //mockClients.Setup(c => c.All)
-    //    //    .Returns(mockClientProxy.Object);
+        //var mockhub = new Mock<IHubContext<SignalRHub>>();
 
-    //    var hubContext = new Mock<IHubContext<SignalRHub>>();
-    //    hubContext.Setup(h => h.Clients)
-    //        .Returns(() => mockClients.Object);
+        //var mockConsumer = new Mock<RabbitMQConsumer>();
 
-    //    // Act
-    //    var mockrabbitMQConsumer = new Mock<RabbitMQConsumer>(_mockRabbitMQService.Object, hubContext, _configuration);
+        //mockConsumer.Setup(m => m.ReadMessages())
+        //    .Returns(Task.CompletedTask);
 
-    //    //mockrabbitMQConsumer.Setup(mrc => mrc.ReadMessages())
-    //    //    .Returns(It.IsAny<Task>());
+        //mockConsumer.VerifyAll();
 
-    //    // Assert
-    //    //_mockRabbitMQService.VerifyAll();
-    //    mockrabbitMQConsumer.VerifyAll();
-    //    mockrabbitMQConsumer.Verify(h => h.Dispose());
-    //    //mockrabbitMQConsumer.Verify(c => c.ReadMessages());
+        //    var mockClients = new Mock<IHubClients>();
+        //    //var mockClientProxy = new Mock<IClientProxy>();
+        //    //mockClients.Setup(c => c.All)
+        //    //    .Returns(mockClientProxy.Object);
+
+        //    var hubContext = new Mock<IHubContext<SignalRHub>>();
+        //    hubContext.Setup(h => h.Clients)
+        //        .Returns(() => mockClients.Object);
+
+        //    // Act
+        //    var mockrabbitMQConsumer = new Mock<RabbitMQConsumer>(_mockRabbitMQService.Object, hubContext, _configuration);
+
+        //    //mockrabbitMQConsumer.Setup(mrc => mrc.ReadMessages())
+        //    //    .Returns(It.IsAny<Task>());
+
+        //    // Assert
+        //    //_mockRabbitMQService.VerifyAll();
+        //    mockrabbitMQConsumer.VerifyAll();
+        //    mockrabbitMQConsumer.Verify(h => h.Dispose());
+        //    //mockrabbitMQConsumer.Verify(c => c.ReadMessages());
     //}
 
     //[Fact]

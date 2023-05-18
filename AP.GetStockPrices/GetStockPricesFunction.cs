@@ -12,7 +12,7 @@ namespace AP.GetStockPrices
         private readonly HttpClient _client = new();
         private readonly IWebScraperService _webScraperService;
         private readonly IRabbitMQPublisherService _rabbitMQPublisherService;
-        private readonly string nodeId = "137";
+        private readonly string _nodeId = "137";
 
         public GetStockPricesFunction(IHttpClientFactory clientFactory, IWebScraperService webScraperService, IRabbitMQPublisherService rabbitMQPublisherService)
         {
@@ -28,15 +28,12 @@ namespace AP.GetStockPrices
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
+
             // Webscraper
-            var targetString = $"//div[contains(@id, 'node-{nodeId}')]";
+            var targetString = $"//div[contains(@id, 'node-{_nodeId}')]";
             var targetUrl = "https://npinvestor.dk/aktier-og-kurslister/aktier/danmark/alle-danske-aktier";
 
             HtmlWeb web = new();
-
-            //web.UsingCache = false;
-            //web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0)";
-
 
             HtmlDocument document = await web.LoadFromWebAsync(targetUrl);
 

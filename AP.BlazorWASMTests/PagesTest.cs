@@ -22,21 +22,21 @@ public class PagesTest : TestContext
         cut.Markup.Contains(@"<table>...</table>");
     }
 
-    // TEst af om Oninitialized henter uri
+    // Test af om MainLayout er inkluderet i markup?
     [Fact]
-    public void Index_OnInitialized_Gets_Uri()
+    public void Index_Contains_MainLayout()
     {
         // Arrange
         var navMan = Services.GetRequiredService<FakeNavigationManager>();
         var hostEnvironment = Services.GetRequiredService<FakeWebAssemblyHostEnvironment>();
         hostEnvironment.SetEnvironmentToDevelopment();
 
-        var cut = RenderComponent<BlazorWASM.Pages.Index>();
-
         // Act
+        var cut = RenderComponent<BlazorWASM.Pages.Index>();
 
 
         // Assert
+        cut.Markup.Contains(@"</ MainLayout>");
     }
 
 
