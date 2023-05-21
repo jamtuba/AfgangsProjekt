@@ -86,7 +86,7 @@ public class PagesTest : TestContext
         // Arrange
 
         // Act
-        _cut.WaitForState(() => _cut.Find("h2").TextContent == "Connected", TimeSpan.FromSeconds(10));
+        _cut.WaitForState(() => _cut.Find("h2").TextContent == "Connected", TimeSpan.FromSeconds(15)); // Grunden til det lange timespan er at min web app instance skal vågne på Azure, da den måske er i dvale..
         var h2Tag = _cut.Find("h2");
 
         // Assert
