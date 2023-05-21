@@ -47,7 +47,7 @@ public class PagesTest : TestContext
 
         // Assert
         Assert.NotNull(h1Tag);
-        h1Tag.MarkupMatches("<h1>Number of companies: 0</h1>");
+        h1Tag.MarkupMatches("<h1>Number of messages recieved: 0</h1>");
     }
 
     // Er H3 teksten er rigtig?
