@@ -20,7 +20,7 @@ public class PagesTest : TestContext
         _cut = RenderComponent<BlazorWASM.Pages.Index>();
     }
 
-    // Test af om der er en tabel på siden
+    // Er der en tabel på siden
     [Fact]
     public void Index_Shows_Table()
     {
@@ -36,7 +36,7 @@ public class PagesTest : TestContext
         theadTags.MarkupMatches("<thead diff:ignoreChildren></thead>");
     }
 
-    // Test af om H1 er inkluderet i markup og viser en bestemt text?
+    // Er H1 inkluderet i markup og viser den en bestemt text?
     [Fact]
     public void Index_Contains_H1_tag()
     {
@@ -50,7 +50,7 @@ public class PagesTest : TestContext
         h1Tag.MarkupMatches("<h1>Number of companies: 0</h1>");
     }
 
-    // Test af om H3 teksten er rigtig?
+    // Er H3 teksten er rigtig?
     [Fact]
     public void App_Is_In_Environment()
     {
@@ -65,7 +65,7 @@ public class PagesTest : TestContext
         h3Tags[1].MarkupMatches($"<h3>App is in {environment}</h3>");
     }
 
-    // Test af StartHubConnection er connecting fra starten
+    // Er StartHubConnection er connecting fra starten
     [Fact]
     public void HubConnection_Is_Connecting()
     {
@@ -79,7 +79,8 @@ public class PagesTest : TestContext
         h2Tag.MarkupMatches($"<h2>Connecting</2>");
     }
 
-    // Test af StartHubConnection sætter Hubconnection til connected
+    // Er StartHubConnection connected efterventetid?
+    // Denne test kan fejle hvis Azure Web App Service ikke når at vågne på de 15 sekunder der er sat af!
     [Fact]
     public void HubConnection_Is_Connected()
     {

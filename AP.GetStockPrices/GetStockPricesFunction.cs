@@ -44,7 +44,6 @@ namespace AP.GetStockPrices
             log.LogInformation($"Webscraper was executed at {DateTime.Now:G} getting {companies.Count} companies.");
 
 
-
             // RabbitMQ
             var (queue, body) = _rabbitMQPublisherService.PublishRabbitMQ(companies);
 

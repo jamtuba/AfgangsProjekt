@@ -51,13 +51,11 @@ namespace AP.FunctionTests
             // Arrange
 
             // Act
-
             var getStockPrices = new GetStockPricesFunction(_mockFactory.Object,_mockWebscraper.Object, _mockRabbitMQPublisher.Object);
             await getStockPrices.GetStockPrices(null, _mockLogger.Object);
 
 
             // Assert
-
             _mockLogger.Verify(
         m => m.Log(
             LogLevel.Information,
@@ -80,7 +78,6 @@ namespace AP.FunctionTests
                 .Returns((It.IsAny<string>(), It.IsAny<byte[]>()));
 
             // Act
-
             var result = sut.PublishRabbitMQ(_companyList);
             var expected = _mockRabbitMQPublisher.Object.PublishRabbitMQ(_companyList);
 
@@ -108,9 +105,7 @@ namespace AP.FunctionTests
         [Fact]
         public void GetNodes_Return_List_Of_CompanyInfo()
         {
-
             // Arrange
-
             var nodeId = "137";
 
             var html = $@"<div><div id='node-{nodeId}'><div><div id='{nodeId}_company_name_0'><a>Test1</a></div><div id='{nodeId}_last_0'>111</div></div><div><div id='{nodeId}_company_name_1'><a>Test2</a></div><div id='{nodeId}_last_1'>222</div></div><div><div id='{nodeId}_company_name_2'><a>Test3</a></div><div id='{nodeId}_last_2'>333</div></div></div></div>";

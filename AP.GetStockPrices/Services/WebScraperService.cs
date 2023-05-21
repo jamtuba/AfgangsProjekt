@@ -23,10 +23,8 @@ public class WebScraperService : IWebScraperService
 
             var companyToAdd = new CompanyInfo();
 
-
             if (node.FirstChild.Id == companyId)
             {
-
                 companies.Add(
                 new CompanyInfo()
                 {
@@ -39,7 +37,6 @@ public class WebScraperService : IWebScraperService
 
                 nodeCount++;
             }
-
         }
         return companies;
     }

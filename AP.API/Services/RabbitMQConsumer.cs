@@ -70,5 +70,4 @@ public class RabbitMQConsumer : IRabbitMQConsumer, IDisposable
         if (_connection.IsOpen)
             _connection.Close();
     }
-
 }

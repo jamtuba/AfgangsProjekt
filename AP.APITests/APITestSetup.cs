@@ -8,7 +8,6 @@ public class APITestSetup
     static readonly string _fileName = "appsettings.json";
     public static void ConfigureEnvironmentVariablesFromAppSettings()
     {
-
         var path = Path.GetDirectoryName(typeof(RabbitMQConsumer).Assembly.Location);
 
         if (File.Exists(Path.Join(path, _fileName)))
