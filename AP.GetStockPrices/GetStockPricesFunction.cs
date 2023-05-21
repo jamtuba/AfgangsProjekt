@@ -23,7 +23,7 @@ namespace AP.GetStockPrices
 
         [FunctionName(nameof(GetStockPrices))]
         public async Task GetStockPrices(
-            [TimerTrigger("0 */1 * * * *")] TimerInfo myTimer,
+            [TimerTrigger("0 */1 * * * *")] TimerInfo _,
             ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");

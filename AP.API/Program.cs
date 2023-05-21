@@ -40,3 +40,7 @@ app.UseCors(builder => builder
 app.MapHub<SignalRHub>(SignalRHub.HubUrl);
 
 app.Run();
+
+
+
+// REMOVE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

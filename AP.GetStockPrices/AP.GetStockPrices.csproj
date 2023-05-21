@@ -10,7 +10,7 @@
 		<PackageReference Include="Microsoft.Azure.WebJobs.Extensions.RabbitMQ" Version="2.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 	</ItemGroup>
-	<ItemGroup>
+	<!--<ItemGroup>
 		<None Update="host.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -18,7 +18,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
 		</None>
-	</ItemGroup>
+	</ItemGroup>-->
 	<ItemGroup>
 		<ProjectReference Include="..\AP.ClassLibrary\AP.ClassLibrary.csproj" />
 	</ItemGroup>

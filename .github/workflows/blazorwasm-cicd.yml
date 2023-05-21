@@ -6,12 +6,14 @@ on:
       - 'master'
     paths: 
       - 'AP.BlazorWASM/**'
+      - 'AP.BlazorWASMTests/**'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches: 
       - 'master'
     paths: 
       - 'AP.BlazorWASM/**'
+      - 'AP.BlazorWASMTests/**'
 
 env :
   BLAZORWASMTESTS_CSPROJ_FILE: '${{ github.workspace }}/AP.BlazorWASMTests/AP.BlazorWASMTests.csproj'
