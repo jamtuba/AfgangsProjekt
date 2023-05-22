@@ -9,7 +9,7 @@
 
 ![Alt text](Diagrams/AP_System_Diagram_170523.jpg "Title")
 
-Kode til forskellige services i forbindelse med mit afgangsprojekt på SmartLearning. <br />
+Kode til de forskellige services i forbindelse med mit afgangsprojekt på SmartLearning. <br />
 For at koden og tests kan køre skal koden bygges først.
 
 Min løsning på afgangsprojektet består af en række projekter med hver sin funktionalitet.
@@ -30,4 +30,5 @@ Min løsning på afgangsprojektet består af en række projekter med hver sin fu
 
 - AP.FuntionTests er tests til min Azure Function applikation og dens afhængigheder.
 
-- AP.GetStockPrices er min Azure Function med en Timer Function og de 2 interfaces IWebscraperService og IRabbitMQPublisherService.
+- AP.GetStockPrices er min Azure Function med en Timer Function og de 2 interfaces IWebscraperService og IRabbitMQPublisherService. <br />
+  Herfra bliver der sendt aktiekurser videre til CloudAMQP som beskeder.
