@@ -42,8 +42,12 @@ Enterpise Integration Patterns diagram
 
 ![EIP diagram](Diagrams/AP_EIP_Flow_Diagram_1.jpg "Afgangs projekt EIP flow diagram")
 <br />
-
-![Timer function diagram](Diagrams/Azure_Timer_Function_Diagram.jpg "Afgangs projekt timer function diagram")
 <br />
+Azure Timer Function komponent diagram
 
-![Minimal API diagram](Diagrams/Minimal_API_Diagram.jpg "Afgangs projekt minimal API diagram")
+![Timer function component diagram](Diagrams/Azure_Timer_Function_Diagram.jpg "Afgangs projekt timer function komponent diagram")
+<br />
+<br />
+Minimal API komponent diagram
+
+![Minimal API component diagram](Diagrams/Minimal_API_Diagram.jpg "Afgangs projekt minimal API komponent diagram")
