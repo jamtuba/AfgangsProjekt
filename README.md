@@ -7,7 +7,7 @@
 # AfgangsProjekt
 ### Diagram over de forskellige services i projektet og flowet imellem dem.
 
-![Alt text](Diagrams/AP_System_Diagram_170523.jpg "Title")
+![system diagram](Diagrams/AP_System_Diagram_170523.jpg "Afgangs projekt system diagram")
 
 Kode til de forskellige services i forbindelse med mit afgangsprojekt på SmartLearning. <br />
 For at koden og tests kan køre skal koden bygges først.
@@ -32,3 +32,18 @@ Min løsning på afgangsprojektet består af en række projekter med hver sin fu
 
 - AP.GetStockPrices er min Azure Function med en Timer Function og de 2 interfaces IWebscraperService og IRabbitMQPublisherService. <br />
   Herfra bliver der sendt aktiekurser videre til CloudAMQP som beskeder.
+<br />
+<br />
+
+### Der er også mulighed for at se de øvrige diagrammer:
+<br />
+
+Enterpise Integration Patterns diagram
+
+![EIP diagram](Diagrams/AP_EIP_Flow_Diagram_1.jpg "Afgangs projekt EIP flow diagram")
+<br />
+
+![Timer function diagram](Diagrams/Azure_Timer_Function_Diagram.jpg "Afgangs projekt timer function diagram")
+<br />
+
+![Minimal API diagram](Diagrams/Minimal_API_Diagram.jpg "Afgangs projekt minimal API diagram")
