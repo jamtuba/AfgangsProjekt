@@ -4,7 +4,9 @@
 <br/>
 [![WEBAPI CI/CD](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/webapi-cicd.yml/badge.svg)](https://github.com/jamtuba/AfgangsProjekt/actions/workflows/webapi-cicd.yml)
 
+
 # AfgangsProjekt
+
 ### Diagram over de forskellige services i projektet og flowet imellem dem.
 
 ![system diagram](Diagrams/AP_System_Diagram_170523.jpg "Afgangs projekt system diagram")
@@ -33,4 +35,6 @@ Min løsning på afgangsprojektet består af en række projekter med hver sin fu
 - AP.GetStockPrices er min Azure Function med en Timer Function og de 2 interfaces IWebscraperService og IRabbitMQPublisherService. <br />
   Herfra bliver der sendt aktiekurser videre til CloudAMQP som beskeder.
 
-- Der er flere diagrammer i [Diagrams-folderen](Diagrams/).
+- [Diagrams](Diagrams/) indeholder flere diagrammer.
+---
+##### I toppen af denne ReadMe er 3 badges der viser at GitHub Action har kørt succesfuldt CI/CD
