@@ -45,9 +45,9 @@ Enterpise Integration Patterns diagram
 <br />
 Azure Timer Function komponent diagram
 
-![Timer function component diagram](Diagrams/Azure_Timer_Function_Diagram.jpg "Afgangs projekt timer function komponent diagram")
+![Azure Timer Function component diagram](Diagrams/Azure_Timer_Function_Diagram.jpg "Afgangs projekt Azure Function komponent diagram")
 <br />
 <br />
-Minimal API komponent diagram
+Minimal Web API komponent diagram
 
-![Minimal API component diagram](Diagrams/Minimal_API_Diagram.jpg "Afgangs projekt minimal API komponent diagram")
+![Minimal Web API component diagram](Diagrams/Minimal_API_Diagram.jpg "Afgangs projekt Minimal Web API komponent diagram")
