@@ -1,6 +1,4 @@
-﻿using AP.GetStockPrices;
-
-namespace AP.FunctionTests;
+﻿namespace AP.FunctionTests;
 
 public class GlobalSetup
 {

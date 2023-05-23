@@ -19,7 +19,7 @@ public class APITest
     }
 
     [Fact]
-    public void RabbitMQService_Return_Should_IConnection()
+    public void RabbitMQService_Should_Return_IConnection()
     {
         // Arrange
 

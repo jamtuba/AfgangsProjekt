@@ -1,5 +1,4 @@
 using AP.ClassLibrary.Helpers;
-using AP.GetStockPrices;
 using AP.GetStockPrices.Services;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
