@@ -11,5 +11,6 @@ public class RabbitMQService : IRabbitMQService
         var channel = connection.CreateConnection();
 
         return channel;
+        // Just a comment to run Actions
     }
 }
